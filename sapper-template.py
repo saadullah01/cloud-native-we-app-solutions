@@ -1,11 +1,15 @@
 import pexpect
 import time
+import os
+
+user = os.environ["username"]
+token = os.environ["access_token"]
 
 print("Pushing Code to GitHub:")
-ch = pexpect.spawn(' git push --set-upstream origin add-the-web-application')
+ch = pexpect.spawn('git push')
 ch.expect('Username for .*:')
-ch.sendline('$username')
+ch.sendline(user)
 ch.expect('Password for .*:')
-ch.sendline('$password')
+ch.sendline(token)
 time.sleep(5)
 print("Done")
