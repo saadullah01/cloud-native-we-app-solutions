@@ -8,7 +8,7 @@
     3. branch_name: string or None
 '''
 
-import pexpect, os, sys
+import pexpect, os, sys, time
 
 timeout = int(sys.argv[1])
 commit_comment = sys.argv[2]
@@ -31,5 +31,5 @@ ch.expect('Username for .*:')
 ch.sendline(username)
 ch.expect('Password for .*:')
 ch.sendline(password)
-ch.expect('root@educative:.*', timeout=timeout)
+time.sleep(timeout)
 print("Done")
