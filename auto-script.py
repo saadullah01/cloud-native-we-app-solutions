@@ -25,7 +25,7 @@ if branch_name:
 
 print("Pushing Code to GitHub:")
 pexpect.run("git add .", cwd=cmd_dir)
-pexpect.run("git commit -m ", cwd=cmd_dir)
+pexpect.run(commit_cmd, cwd=cmd_dir)
 ch = pexpect.spawn(push_cmd, cwd=cmd_dir)
 ch.expect('Username for .*:')
 ch.sendline(username)
