@@ -1,2 +1,2 @@
-# cloud-native-web-app-solutions
-The repo contains the branches for every lesson with their solutions.
+# Cloud-Native Web App (CNWA) Solution Files
+The repo contains the branches for every lesson with their solution files and auto script.
