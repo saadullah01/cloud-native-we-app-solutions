@@ -21,8 +21,8 @@ pexpect.run(
 cmd_dir = "/Educative/" + repo_name + "/"
 
 pexpect.run("mkdir firebase", cwd=cmd_dir+"services/web/")
-pexpect.run("cp -r /Educative/cnwa-solution-files/files/firebase/ "+cmd_dir+"services/web/firebase/")
-pexpect.run("npm install -D firebase-tools", cwd=cmd_dir+"services/web/firebase")
+pexpect.run("cp /Educative/cnwa-solution-files/files/firebase/* "+cmd_dir+"services/web/firebase/")
+# pexpect.run("npm install -D firebase-tools", cwd=cmd_dir+"services/web/firebase")
 # pexpect.run("cp /Educative/cnwa-solution-files/files/services-web/package.json "+cmd_dir+"services/web/")
 
 # pexpect.run("git add .", cwd=cmd_dir)
