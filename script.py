@@ -22,7 +22,7 @@ pexpect.run(
 cmd_dir = "/Educative/" + repo_name + "/"
 
 pexpect.run("git switch -c enable-firebase-hosting", cwd=cmd_dir)
-pexpect.run("cp -r files/template.html "+cmd_dir+"services/web/src/")
+pexpect.run("cp /Educative/cnwa-solution-files/files/template.html "+cmd_dir+"services/web/src/")
 pexpect.run("git add .", cwd=cmd_dir)
 pexpect.run("git commit -m 'Firebase SDK added'", cwd=cmd_dir)
 ch = pexpect.spawn("git push --set-upstream origin enable-firebase-hosting", cwd=cmd_dir)
