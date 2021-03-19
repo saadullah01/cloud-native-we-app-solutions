@@ -36,7 +36,7 @@ pexpect.run("cp "+sol_dir+"firebase/package-lock.json "+cmd_dir+"services/web/fi
 pexpect.run("cp "+sol_dir+"firebase/package.json "+cmd_dir+"services/web/firebase/")
 pexpect.run("cp "+sol_dir+"services-web/package-lock.json "+cmd_dir+"services/web/")
 pexpect.run("cp "+sol_dir+"services-web/package.json "+cmd_dir+"services/web/")
-pexpect.run("cp "+sol_dir+"services-web/.gitignore "+cmd_dir+"services/web/")
+pexpect.run("cp "+sol_dir+"firebase/.gitignore "+cmd_dir+"services/web/firebase/")
 
 pexpect.run("git add .", cwd=cmd_dir)
 pexpect.run("git commit -m 'web application deployed'", cwd=cmd_dir)
