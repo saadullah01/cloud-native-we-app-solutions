@@ -5,7 +5,7 @@
     commands.txt
 '''
 
-import pexpect, os, sys, time
+import pexpect, os, sys, time, json
 
 # Variables
 username = os.environ["username"]
