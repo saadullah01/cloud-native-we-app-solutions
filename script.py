@@ -29,6 +29,7 @@ data = {
 with open(cmd_dir+"services/web/firebase/.firebaserc", "w") as jsonFile:
     json.dump(data, jsonFile, indent=2)
 
+pexpect.run("rm -rf public", cwd=cmd_dir+"services/web/firebase/")
 pexpect.run("cp "+sol_dir+"firebase/package-lock.json "+cmd_dir+"services/web/firebase/")
 pexpect.run("cp "+sol_dir+"firebase/package.json "+cmd_dir+"services/web/firebase/")
 pexpect.run("cp "+sol_dir+"services-web/package-lock.json "+cmd_dir+"services/web/")
