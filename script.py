@@ -5,12 +5,13 @@
     commands.txt
 '''
 
-import pexpect, os, sys, time
+import pexpect, os, sys, time, json
 
 # Variables
 username = os.environ["username"]
 password = os.environ["access_token"]
 repo_name = os.environ["repository_name"]
+firebase_proj = os.environ["firebase_proj_name"]
 
 # Clone user's repo
 pexpect.run(
