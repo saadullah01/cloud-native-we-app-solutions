@@ -7,10 +7,6 @@
 
 import pexpect, os, sys, time
 
-
-# Parameters
-push_timeout = 10
-
 # Variables
 username = os.environ["username"]
 password = os.environ["access_token"]
