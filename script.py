@@ -18,6 +18,7 @@ pexpect.run(
     cwd="/Educative/")
 
 cmd_dir = "/Educative/" + repo_name + "/"
+sol_dir = "/Educative/cnwa-solution-files/files/"
 
 # Handling .firebaserc
 data = {
@@ -28,8 +29,14 @@ data = {
 with open(cmd_dir+"services/web/firebase/.firebaserc", "w") as jsonFile:
     json.dump(data, jsonFile, indent=2)
 
+pexpect.run("cp "+sol_dir+"firebase/package-lock.json "+cmd_dir+"services/web/firebase/")
+pexpect.run("cp "+sol_dir+"firebase/package.json "+cmd_dir+"services/web/firebase/")
+pexpect.run("cp "+sol_dir+"services-web/package-lock.json "+cmd_dir+"services/web/")
+pexpect.run("cp "+sol_dir+"services-web/package.json "+cmd_dir+"services/web/")
+pexpect.run("cp "+sol_dir+"services-web/.gitignore "+cmd_dir+"services/web/")
+
 pexpect.run("git add .", cwd=cmd_dir)
-pexpect.run("git commit -m 'message'", cwd=cmd_dir)
+pexpect.run("git commit -m 'web application deployed'", cwd=cmd_dir)
 ch = pexpect.spawn('git push', cwd=cmd_dir)
 ch.expect('Username for .*:')
 ch.sendline(username)
