@@ -30,8 +30,9 @@ data = {
 with open(cmd_dir+"services/web/firebase/.firebaserc", "w") as jsonFile:
     json.dump(data, jsonFile, indent=2)
 
+pexpect.run("cp /Educative/cnwa-solution-files/files/services-web-deploy.yml "+cmd_dir+".github/workflows/")
 pexpect.run("git add .", cwd=cmd_dir)
-pexpect.run("git commit -m 'message'", cwd=cmd_dir)
+pexpect.run("git commit -m 'removed test workflow changes and enabled workflow optimization'", cwd=cmd_dir)
 ch = pexpect.spawn('git push', cwd=cmd_dir)
 ch.expect('Username for .*:')
 ch.sendline(username)
