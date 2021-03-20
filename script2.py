@@ -1,7 +1,6 @@
 import os, json
 
 firebase_proj = os.environ["firebase_proj_name"]
-cmd_dir = "/Educative/" + repo_name + "/"
 
 # Handling .firebaserc
 data = {
