@@ -13,6 +13,7 @@ password = os.environ["access_token"]
 repo_name = os.environ["repository_name"]
 firebase_proj = os.environ["firebase_proj_name"]
 
+print("Pushing code to GitHub repo '"+repo_name+"'...")
 # Clone user's repo
 pexpect.run(
     "git clone -b enable-firebase-hosting https://github.com/"+username+"/"+repo_name+".git",
