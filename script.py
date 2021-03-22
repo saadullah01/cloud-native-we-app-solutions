@@ -16,10 +16,11 @@ firebase_proj = os.environ["firebase_proj_name"]
 print("Pushing code to GitHub repo '"+repo_name+"'...")
 # Clone user's repo
 pexpect.run(
-    "git clone -b enable-firebase-hosting https://github.com/"+username+"/"+repo_name+".git",
+    "git clone -b add-feature-toggles https://github.com/"+username+"/"+repo_name+".git",
     cwd="/Educative/")
 
 cmd_dir = "/Educative/" + repo_name + "/"
+sol_dir = "/Educative/cnwa-solution-files/files/"
 
 # Handling .firebaserc
 data = {
@@ -30,8 +31,11 @@ data = {
 with open(cmd_dir+"services/web/firebase/.firebaserc", "w") as jsonFile:
     json.dump(data, jsonFile, indent=2)
 
+pexpect.run("cp -r "+sol_dir+"components "+cmd_dir+"services/web/src/")
+pexpect.run("cp -r "+sol_dir+"feature-toggles "+cmd_dir+"services/web/src/")
+pexpect.run("cp "+sol_dir+"about.svelte "+cmd_dir+"services/web/src/routes/")
 pexpect.run("git add .", cwd=cmd_dir)
-pexpect.run("git commit -m 'message'", cwd=cmd_dir)
+pexpect.run("git commit -m 'set up feature toggle'", cwd=cmd_dir)
 ch = pexpect.spawn('git push', cwd=cmd_dir)
 ch.expect('Username for .*:')
 ch.sendline(username)
