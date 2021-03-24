@@ -33,7 +33,7 @@ with open(cmd_dir+"services/web/firebase/.firebaserc", "w") as jsonFile:
 
 pexpect.run("cp "+sol_dir+"package.json "+cmd_dir+"services/web/")
 pexpect.run("cp "+sol_dir+"package-lock.json "+cmd_dir+"services/web/")
-pexpect.run("cp "+sol_dir+"command.js "+cmd_dir+"services/web/cypress/support/")
+pexpect.run("cp "+sol_dir+"commands.js "+cmd_dir+"services/web/cypress/support/")
 pexpect.run("cp "+sol_dir+"spec.js "+cmd_dir+"services/web/cypress/integration/")
 pexpect.run("git add .", cwd=cmd_dir)
 pexpect.run("git commit -m 'Add the @testing-library/cypress dependency.'", cwd=cmd_dir)
