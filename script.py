@@ -45,7 +45,7 @@ with open(cmd_dir+"services/web/cypress.json", "w") as jsonFile:
 pexpect.run("cp "+sol_dir+"tailwindcss.svelte "+cmd_dir+"services/web/src/components/")
 pexpect.run("cp "+sol_dir+"_layout.svelte "+cmd_dir+"services/web/src/routes/")
 pexpect.run("git add .", cwd=cmd_dir)
-pexpect.run("git commit -m 'message'", cwd=cmd_dir)
+pexpect.run("git commit -m 'Create a Tailwind CSS component.'", cwd=cmd_dir)
 ch = pexpect.spawn('git push', cwd=cmd_dir)
 ch.expect('Username for .*:')
 ch.sendline(username)
