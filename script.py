@@ -12,6 +12,7 @@ username = os.environ["username"]
 password = os.environ["access_token"]
 repo_name = os.environ["repository_name"]
 firebase_proj = os.environ["firebase_proj_name"]
+cypress_projectID = os.environ["cypress_projectID"]
 
 print("Pushing code to GitHub repo '"+repo_name+"'...")
 # Clone user's repo
@@ -20,6 +21,7 @@ pexpect.run(
     cwd="/Educative/")
 
 cmd_dir = "/Educative/" + repo_name + "/"
+sol_dir = "/Educative/cnwa-solution-files/files/"
 
 # Handling .firebaserc
 data = {
@@ -29,6 +31,16 @@ data = {
 }
 with open(cmd_dir+"services/web/firebase/.firebaserc", "w") as jsonFile:
     json.dump(data, jsonFile, indent=2)
+
+# Handling cypress.json
+data2 = {
+  "baseUrl": "http://localhost:3000/",
+  "componentFolder": "cypress/components",
+  "experimentalComponentTesting": True,
+  "projectId": cypress_projectID
+}
+with open(cmd_dir+"services/web/cypress.json", "w") as jsonFile:
+  json.dump(data2, jsonFile, indent=2)
 
 pexpect.run("git add .", cwd=cmd_dir)
 pexpect.run("git commit -m 'message'", cwd=cmd_dir)
