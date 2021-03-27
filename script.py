@@ -17,7 +17,7 @@ cypress_projectID = os.environ["cypress_projectID"]
 print("Pushing code to GitHub repo '"+repo_name+"'...")
 # Clone user's repo
 pexpect.run(
-    "git clone -b enable-firebase-hosting https://github.com/"+username+"/"+repo_name+".git",
+    "git clone -b add-tailwind-css https://github.com/"+username+"/"+repo_name+".git",
     cwd="/Educative/")
 
 cmd_dir = "/Educative/" + repo_name + "/"
@@ -42,6 +42,8 @@ data2 = {
 with open(cmd_dir+"services/web/cypress.json", "w") as jsonFile:
   json.dump(data2, jsonFile, indent=2)
 
+pexpect.run("cp "+sol_dir+"tailwindcss.svelte "+cmd_dir+"services/web/src/components/")
+pexpect.run("cp "+sol_dir+"_layout.svelte "+cmd_dir+"services/web/src/routes/")
 pexpect.run("git add .", cwd=cmd_dir)
 pexpect.run("git commit -m 'message'", cwd=cmd_dir)
 ch = pexpect.spawn('git push', cwd=cmd_dir)
