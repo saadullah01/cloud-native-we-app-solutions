@@ -17,7 +17,7 @@ cypress_projectID = os.environ["cypress_projectID"]
 print("Pushing code to GitHub repo '"+repo_name+"'...")
 # Clone user's repo
 pexpect.run(
-    "git clone -b enable-firebase-hosting https://github.com/"+username+"/"+repo_name+".git",
+    "git clone https://github.com/"+username+"/"+repo_name+".git",
     cwd="/Educative/")
 
 cmd_dir = "/Educative/" + repo_name + "/"
@@ -42,9 +42,11 @@ data2 = {
 with open(cmd_dir+"services/web/cypress.json", "w") as jsonFile:
   json.dump(data2, jsonFile, indent=2)
 
+pexpect.run("git switch -c add-user-auth", cwd=cmd_dir)
+pexpect.run("cp "+sol_dir+"template.html "+cmd_dir+"services/web/src/")
 pexpect.run("git add .", cwd=cmd_dir)
-pexpect.run("git commit -m 'message'", cwd=cmd_dir)
-ch = pexpect.spawn('git push', cwd=cmd_dir)
+pexpect.run("git commit -m 'configured Firebase Authentication and FirebaseUI'", cwd=cmd_dir)
+ch = pexpect.spawn('git push --set-upstream origin add-user-auth', cwd=cmd_dir)
 ch.expect('Username for .*:')
 ch.sendline(username)
 ch.expect('Password for .*:')
