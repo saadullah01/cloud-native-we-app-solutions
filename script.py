@@ -42,6 +42,7 @@ data2 = {
 with open(cmd_dir+"services/web/cypress.json", "w") as jsonFile:
   json.dump(data2, jsonFile, indent=2)
 
+pexpect.run("rm -rf blog", cwd=cmd_dir+"services/web/src/routes")
 pexpect.run("cp -r "+sol_dir+"blog "+cmd_dir+"services/web/src/routes/")
 pexpect.run("cp "+sol_dir+"spec.js "+cmd_dir+"services/web/cypress/integration/")
 pexpect.run("git add .", cwd=cmd_dir)
