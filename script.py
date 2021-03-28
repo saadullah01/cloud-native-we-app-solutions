@@ -17,7 +17,7 @@ cypress_projectID = os.environ["cypress_projectID"]
 print("Pushing code to GitHub repo '"+repo_name+"'...")
 # Clone user's repo
 pexpect.run(
-    "git clone -b enable-firebase-hosting https://github.com/"+username+"/"+repo_name+".git",
+    "git clone -b add-user-auth https://github.com/"+username+"/"+repo_name+".git",
     cwd="/Educative/")
 
 cmd_dir = "/Educative/" + repo_name + "/"
