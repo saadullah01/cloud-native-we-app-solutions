@@ -43,7 +43,7 @@ with open(cmd_dir+"services/web/cypress.json", "w") as jsonFile:
   json.dump(data2, jsonFile, indent=2)
 
 pexpect.run("git switch -c add-firebase-emulators", cwd=cmd_dir)
-pexpect.run("cp "+sol_dir+"firestore.json "+cmd_dir+"services/web/firebase/")
+pexpect.run("cp "+sol_dir+"firebase.json "+cmd_dir+"services/web/firebase/")
 pexpect.run("cp "+sol_dir+"package-lock.json "+cmd_dir+"services/web/firebase/")
 pexpect.run("cp "+sol_dir+"template.html "+cmd_dir+"services/web/src/")
 pexpect.run("git add .", cwd=cmd_dir)
