@@ -42,6 +42,9 @@ data2 = {
 with open(cmd_dir+"services/web/cypress.json", "w") as jsonFile:
   json.dump(data2, jsonFile, indent=2)
 
+pexpect.run("cp "+sol_dir+"_layout.svelte "+cmd_dir+"services/web/src/routes/")
+pexpect.run("cp "+sol_dir+"user-observer.svelte "+cmd_dir+"services/web/src/components/")
+pexpect.run("cp -r "+sol_dir+"stores "+cmd_dir+"services/web/src/")
 pexpect.run("git add .", cwd=cmd_dir)
 pexpect.run("git commit -m 'message'", cwd=cmd_dir)
 ch = pexpect.spawn('git push', cwd=cmd_dir)
