@@ -44,6 +44,7 @@ with open(cmd_dir+"services/web/cypress.json", "w") as jsonFile:
 
 pexpect.run("cp "+sol_dir+"index.svelte "+cmd_dir+"services/web/src/routes/admin/")
 pexpect.run("cp -r "+sol_dir+"ui-elements "+cmd_dir+"services/web/src/components/")
+pexpect.run("cp "+sol_dir+"new-blog-post.svelte "+cmd_dir+"services/web/src/components/")
 pexpect.run("git add .", cwd=cmd_dir)
 pexpect.run("git commit -m 'Create a User Interface.'", cwd=cmd_dir)
 ch = pexpect.spawn('git push', cwd=cmd_dir)
