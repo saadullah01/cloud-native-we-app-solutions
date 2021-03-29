@@ -52,8 +52,9 @@ data3 = {
 with open(cmd_dir+"services/web/firebase/functions/.runtimeconfig.json", "w") as jsonFile:
   json.dump(data3, jsonFile, indent=2)
 
+pexpect.run("cp "+sol_dir+".gitignore "+cmd_dir+"services/web/firebase/functions/")
 pexpect.run("git add .", cwd=cmd_dir)
-pexpect.run("git commit -m 'message'", cwd=cmd_dir)
+pexpect.run("git commit -m 'Test the New Service'", cwd=cmd_dir)
 ch = pexpect.spawn('git push', cwd=cmd_dir)
 ch.expect('Username for .*:')
 ch.sendline(username)
