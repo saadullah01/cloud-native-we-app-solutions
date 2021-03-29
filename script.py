@@ -42,9 +42,7 @@ data2 = {
 with open(cmd_dir+"services/web/cypress.json", "w") as jsonFile:
   json.dump(data2, jsonFile, indent=2)
 
-pexpect.run("cp "+sol_dir+"index.ts "+cmd_dir+"services/web/firebase/functions/src/firestore/posts/on-create/cross-post-to-devto/")
-pexpect.run("cp "+sol_dir+"package.json "+cmd_dir+"services/web/firebase/functions/")
-pexpect.run("cp "+sol_dir+"package-lock.json "+cmd_dir+"services/web/firebase/functions/")
+pexpect.run("cp -r "+sol_dir+"functions "+cmd_dir+"services/web/firebase/")
 pexpect.run("git add .", cwd=cmd_dir)
 pexpect.run("git commit -m 'Develop the Integration with DEV'", cwd=cmd_dir)
 ch = pexpect.spawn('git push', cwd=cmd_dir)
