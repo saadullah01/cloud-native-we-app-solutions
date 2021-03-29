@@ -17,7 +17,7 @@ cypress_projectID = os.environ["cypress_projectID"]
 print("Pushing code to GitHub repo '"+repo_name+"'...")
 # Clone user's repo
 pexpect.run(
-    "git clone -b enable-firebase-hosting https://github.com/"+username+"/"+repo_name+".git",
+    "git clone https://github.com/"+username+"/"+repo_name+".git",
     cwd="/Educative/")
 
 cmd_dir = "/Educative/" + repo_name + "/"
@@ -42,9 +42,13 @@ data2 = {
 with open(cmd_dir+"services/web/cypress.json", "w") as jsonFile:
   json.dump(data2, jsonFile, indent=2)
 
+pexpect.run("git switch -c event-based-triggers", cwd=cmd_dir)
+pexpect.run("cp -r "+sol_dir+"functions "+cmd_dir+"services/web/firebase/")
+pexpect.run("cp "+sol_dir+"firebase.json "+cmd_dir+"services/web/firebase/")
+pexpect.run("cp "+sol_dir+"package.json "+cmd_dir+"services/web/firebase/")
 pexpect.run("git add .", cwd=cmd_dir)
-pexpect.run("git commit -m 'message'", cwd=cmd_dir)
-ch = pexpect.spawn('git push', cwd=cmd_dir)
+pexpect.run("git commit -m 'Initialize Firebase Cloud Functions'", cwd=cmd_dir)
+ch = pexpect.spawn('git push --set-upstream origin event-based-triggers', cwd=cmd_dir)
 ch.expect('Username for .*:')
 ch.sendline(username)
 ch.expect('Password for .*:')
