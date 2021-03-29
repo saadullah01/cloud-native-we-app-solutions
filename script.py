@@ -13,6 +13,7 @@ password = os.environ["access_token"]
 repo_name = os.environ["repository_name"]
 firebase_proj = os.environ["firebase_proj_name"]
 cypress_projectID = os.environ["cypress_projectID"]
+dev_api_key = os.environ["dev_api_key"]
 
 print("Pushing code to GitHub repo '"+repo_name+"'...")
 # Clone user's repo
@@ -41,6 +42,15 @@ data2 = {
 }
 with open(cmd_dir+"services/web/cypress.json", "w") as jsonFile:
   json.dump(data2, jsonFile, indent=2)
+
+# Handling cypress.json
+data3 = {
+  "crossposttodevto": {
+    "apikey": dev_api_key
+  }
+}
+with open(cmd_dir+"services/web/firebase/functions/.runtimeconfig.json", "w") as jsonFile:
+  json.dump(data3, jsonFile, indent=2)
 
 pexpect.run("git add .", cwd=cmd_dir)
 pexpect.run("git commit -m 'message'", cwd=cmd_dir)
