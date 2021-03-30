@@ -1,5 +1,6 @@
 import os, json
 
+repo_name = os.environ["repository_name"]
 dev_api_key = os.environ["dev_api_key"]
 cmd_dir = "/Educative/"+repo_name+"/"
 
