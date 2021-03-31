@@ -24,34 +24,9 @@ pexpect.run(
 cmd_dir = "/Educative/" + repo_name + "/"
 sol_dir = "/Educative/cnwa-solution-files/files/"
 
-# Handling .firebaserc
-data = {
-  "projects": {
-    "default": firebase_proj
-  }
-}
-with open(cmd_dir+"services/web/firebase/.firebaserc", "w") as jsonFile:
-    json.dump(data, jsonFile, indent=2)
-
-# Handling cypress.json
-data2 = {
-  "baseUrl": "http://localhost:3000/",
-  "componentFolder": "cypress/components",
-  "experimentalComponentTesting": True,
-  "projectId": cypress_projectID
-}
-with open(cmd_dir+"services/web/cypress.json", "w") as jsonFile:
-  json.dump(data2, jsonFile, indent=2)
-
-# Handling cypress.json
-data3 = {
-  "crossposttodevto": {
-    "apikey": dev_api_key
-  }
-}
-with open(cmd_dir+"services/web/firebase/functions/.runtimeconfig.json", "w") as jsonFile:
-  json.dump(data3, jsonFile, indent=2)
-
+pexpect.run("cp "+sol_dir+"package.json "+cmd_dir+"services/web/firebase/")
+pexpect.run("cp "+sol_dir+"services-web.yml "+cmd_dir+".github/workflows/")
+pexpect.run("cp "+sol_dir+"services-web-firebase-functions-src-firestoreposts-on-create-cross-post-to-devto.yml "+cmd_dir+".github/workflows/")
 pexpect.run("git add .", cwd=cmd_dir)
 pexpect.run("git commit -m 'message'", cwd=cmd_dir)
 ch = pexpect.spawn('git push', cwd=cmd_dir)
