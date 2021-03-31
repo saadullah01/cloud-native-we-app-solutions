@@ -1,0 +1,61 @@
+name: Web - firestore-post-on-create-cross-post-to-devto service
+
+on:
+  push:
+    paths:
+      - "services/web/firebase/functions/src/firestore/posts/on-create/cross-post-to-devto/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Restore dependencies
+        id: cache
+        uses: actions/cache@master
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+            */*/*/node_modules
+            */*/*/*/node_modules
+            key: ${{ runner.os }}-${{hashFiles('**/package-lock.json')}}
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm install
+      - name: Bootstrap all services
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm run bootstrap
+      - name: Run service tests
+        working-directory: ./services/web/firebase/functions
+        run: |
+          npm run build
+          ./node_modules/.bin/mocha './src/firestore/posts/on-create/cross-post-to-devto/*.test.js' --reporter spec
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Restore dependencies
+        id: cache
+        uses: actions/cache@master
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+            */*/*/node_modules
+            */*/*/*/node_modules
+            key: ${{ runner.os }}-${{hashFiles('**/package-lock.json')}}
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm install
+      - name: Bootstrap all services
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm run bootstrap
+      - name: Deploy the web - firestore-post-on-create-cross-post-to-devto service
+        working-directory: ./services/web/firebase
+        run: ./node_modules/.bin/firebase deploy --only
+        functions:firestore.posts.onCreate.crossPostToDevto
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
